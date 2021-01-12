@@ -40,8 +40,8 @@ app.use((error: any, req: Request, res: Response, next: () => void) => {
 	res.json({ message: error.message });
 });
 
-const port = process.env.PORT || 8080;
-app.listen(port, () => {
+const port = (process.env.PORT ?? 0) as number || 8080;
+app.listen(port, '0.0.0.0', 0, () => {
 	console.log(`\nServer started at http://localhost:${port}`);
 });
 
