@@ -11,10 +11,10 @@ export const handleConnectRequest = async (req: Request, res: Response) => {
 			service: req.body.service,
 			message: req.body.message
 		});
+		
+		console.log(`connectRequestData: ${JSON.stringify(connectRequest)}`)
 
 		await ConnectRequestRepo.createOne(connectRequest);
-
-		console.log(`connectRequestData: ${JSON.stringify(connectRequest)}`)
 
 		emailHandler.send(req.body, res);
 	}
