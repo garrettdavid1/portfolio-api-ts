@@ -15,7 +15,6 @@ export const ConnectRequestSchema = new Schema({
 	message: { type: String, required: true },
 });
 
-// export const ConnectRequest: Model<IConnectRequest> = model<IConnectRequest>('ConnectRequest', ConnectRequestSchema);
 let ConnectRequest: Model<IConnectRequest> | undefined;
 try {
 	ConnectRequest = mongoose.model('ConnectRequest');
