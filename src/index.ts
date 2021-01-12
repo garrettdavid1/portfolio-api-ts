@@ -16,7 +16,6 @@ const app = express();
 app.use(express.static(path.join(__dirname, '/emailTemplates')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-const port = 8080; // default port to listen
 
 app.use((req: Request, res: Response, next: () => void) => {
 	res.header(
@@ -42,8 +41,8 @@ app.use((error: any, req: Request, res: Response, next: () => void) => {
 });
 
 // start the Express server
-app.listen(port, () => {
-	console.log(`\nServer started at http://localhost:${port}`);
+app.listen(process.env.PORT, () => {
+	console.log(`\nServer started at http://localhost:${process.env.PORT}`);
 });
 
 function wrapAsync(
