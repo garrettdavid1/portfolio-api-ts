@@ -14,6 +14,8 @@ export const handleConnectRequest = async (req: Request, res: Response) => {
 
 		await ConnectRequestRepo.createOne(connectRequest);
 
+		console.log(`connectRequestData: ${JSON.stringify(connectRequest)}`)
+
 		emailHandler.send(req.body, res);
 	}
 }
