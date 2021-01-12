@@ -1,1 +1,1 @@
-web: node src/models/connectRequest.js
+web: node src/models/connectRequest.ts
