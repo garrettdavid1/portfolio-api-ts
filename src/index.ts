@@ -40,9 +40,9 @@ app.use((error: any, req: Request, res: Response, next: () => void) => {
 	res.json({ message: error.message });
 });
 
-// start the Express server
-app.listen(process.env.PORT, () => {
-	console.log(`\nServer started at http://localhost:${process.env.PORT}`);
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+	console.log(`\nServer started at http://localhost:${port}`);
 });
 
 function wrapAsync(
