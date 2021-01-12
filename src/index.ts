@@ -1,8 +1,16 @@
+import dotenv from 'dotenv';
 import express, { Request, Response } from 'express';
 import './database';
 import bodyParser from 'body-parser';
 import { handleConnectRequest } from './controllers/connectRequestController';
 import path from 'path';
+import { startDB } from './database';
+
+if (process.env.NODE_ENV !== 'production') {
+	dotenv.config();
+}
+
+startDB();
 
 const app = express();
 app.use(express.static(path.join(__dirname, '/emailTemplates')));
@@ -11,10 +19,16 @@ app.use(bodyParser.json());
 const port = 8080; // default port to listen
 
 app.use((req: Request, res: Response, next: () => void) => {
-    res.header("Access-Control-Allow-Origin", process.env.ALLOWED_ORIGINS || 'http://localhost:3000');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+	res.header(
+		'Access-Control-Allow-Origin',
+		process.env.ALLOWED_ORIGINS
+	);
+	res.header('Access-Control-Allow-Credentials', 'true');
+	res.header(
+		'Access-Control-Allow-Headers',
+		'Origin, X-Requested-With, Content-Type, Accept'
+	);
+	next();
 });
 
 // define a route handler for the default home page
