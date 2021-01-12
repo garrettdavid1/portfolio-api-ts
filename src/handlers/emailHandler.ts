@@ -1,32 +1,28 @@
 import nodemailer from 'nodemailer';
-import Mail from 'nodemailer/lib/mailer';
 import { Response } from 'express';
 import { connectRequestHtml } from '../emailTemplates/connectRequest';
 
-const emailConfig = {
-	address: process.env.SENDING_ADDRESS,
-	password: process.env.SENDING_ADDRESS_PASSWORD,
-	sendTo: process.env.RECEIVING_ADDRESS
-}
-
 class EmailHandler {
-	transporter: Mail = nodemailer.createTransport({
-		host: 'smtp.gmail.com',
-		port: 465,
-		secure: true,
-		auth: {
-			user: emailConfig.address,
-			pass: emailConfig.password,
-		},
-	});
+	get transporter(){
+		return nodemailer.createTransport({
+			host: 'smtp.gmail.com',
+			port: 465,
+			secure: true,
+			auth: {
+				user: process.env.SENDING_ADDRESS,
+				pass: process.env.SENDING_ADDRESS_PASSWORD,
+			},
+		});
+	}
 
 	send = (
 		data: any,
 		res: Response
 	) => {
+
 		const mailOptions = {
-			from: `VersaDev <${emailConfig.address}>`,
-			to: emailConfig.sendTo,
+			from: `VersaDev <${process.env.SENDING_ADDRESS}>`,
+			to: process.env.RECEIVING_ADDRESS,
 			subject: `Portfolio Connection Request - ${data.name}`,
 			html: this.getEmailTemplateHtml(data),
 		};

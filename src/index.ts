@@ -42,7 +42,7 @@ app.use((error: any, req: Request, res: Response, next: () => void) => {
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
-	console.log(`\nServer started at http://localhost:${port}`);
+	console.log(`\nServer started on port: ${port}`);
 });
 
 function wrapAsync(
