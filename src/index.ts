@@ -34,6 +34,7 @@ app.use((req: Request, res: Response, next: () => void) => {
 app.get('/', (req: Request, res: Response) => {
 	res.send('Hello world!');
 });
+app.get('/ping', wrapAsync(async (req: Request, res: Response) => res.send(true)));
 app.post('/connect', wrapAsync(handleConnectRequest));
 
 app.use((error: any, req: Request, res: Response, next: () => void) => {
